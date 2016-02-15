@@ -34,8 +34,8 @@ function draw() {
 			inputImage.pixels[(y * 640 + x) * 4 + 2] = blueOut;
 
 
-			redOut = blueIn;
-			blueOut = greenIn;
+			redOut = blueIn * 2;
+			blueOut = greenIn * 2;
 			greenOut = redIn;
 
 			inputImage.updatePixels();
@@ -44,6 +44,5 @@ function draw() {
 
 		}
 	}
-
 
 }
