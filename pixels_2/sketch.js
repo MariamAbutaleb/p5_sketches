@@ -32,44 +32,48 @@ function draw() {
 	for (x = 0; x < 640; x++) {
 		console.log(x);
 		for (y = x; y < 360; y++) {
-			var redIn = inputImage.pixels[(y * 640 + x) * 4 + 0];
-			var greenIn = inputImage.pixels[(y * 640 + x) * 4 + 1];
-			var blueIn = inputImage.pixels[(y * 640 + x) * 4 + 2];
+			for (x = 320; x < 640; x++) {
+				for (y = x + 180; y < 360; y++) {
+					var redIn = inputImage.pixels[(y * 640 + x) * 4 + 0];
+					var greenIn = inputImage.pixels[(y * 640 + x) * 4 + 1];
+					var blueIn = inputImage.pixels[(y * 640 + x) * 4 + 2];
 
-			var redOut, blueOut, greenOut;
+					var redOut, blueOut, greenOut;
 
-			//////////////////
-			/// Demo 1: swap channels
+					//////////////////
+					/// Demo 1: swap channels
 
-			// redOut = blueIn;
-			// blueOut = greenIn;
-			// greenOut = redIn;
-
-
-			//////////////////
-			// Demo 2: pick output from randomly offset input sample
-			// creats scatter effect
-			// because we are modifying the image as we work, we will sometimes
-			// sample a pixel we've already changed, it would be better
-			// to read from one image and write out to a different one
-
-			// choose random position for the sample
-			var x2 = x * 2 + floor(random(-50, 51));
-			var y2 = y * 0.5 + floor(random(-50, 51));
-
-			// make sure we don't go outside the image
-			x2 = clamp(x2, 0, 360);
-			y2 = clamp(y2, 0, 360);
-
-			// use the color from the random position
-			redOut = inputImage.pixels[(y2 * 640 + x2) * 4 + 0];
-			greenOut = inputImage.pixels[(y2 * 640 + x2) * 4 + 1];
-			blueOut = inputImage.pixels[(y2 * 640 + x2) * 4 + 2];
+					// redOut = blueIn;
+					// blueOut = greenIn;
+					// greenOut = redIn;
 
 
-			inputImage.pixels[(y * 640 + x) * 4 + 0] = redOut;
-			inputImage.pixels[(y * 640 + x) * 4 + 1] = greenOut;
-			inputImage.pixels[(y * 640 + x) * 4 + 2] = blueOut;
+					//////////////////
+					// Demo 2: pick output from randomly offset input sample
+					// creats scatter effect
+					// because we are modifying the image as we work, we will sometimes
+					// sample a pixel we've already changed, it would be better
+					// to read from one image and write out to a different one
+
+					// choose random position for the sample
+					var x2 = x * 2 + floor(random(-50, 51));
+					var y2 = y * 0.5 + floor(random(-50, 51));
+
+					// make sure we don't go outside the image
+					x2 = clamp(x2, 0, 360);
+					y2 = clamp(y2, 0, 360);
+
+					// use the color from the random position
+					redOut = inputImage.pixels[(y2 * 640 + x2) * 4 + 0];
+					greenOut = inputImage.pixels[(y2 * 640 + x2) * 4 + 1];
+					blueOut = inputImage.pixels[(y2 * 640 + x2) * 4 + 2];
+
+
+					inputImage.pixels[(y * 640 + x) * 4 + 0] = redOut;
+					inputImage.pixels[(y * 640 + x) * 4 + 1] = greenOut;
+					inputImage.pixels[(y * 640 + x) * 4 + 2] = blueOut;
+				}
+			}
 		}
 	}
 	inputImage.updatePixels();
